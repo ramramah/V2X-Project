@@ -1,0 +1,91 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074,  // variabile
+      "stationID":9001, // variabile -> dipende da obu1, obu2 ed RSU
+      "stationType":1,  // variabile -> dipende da obu1, obu2 ed RSU; valore 1 per obu, valore 2 per rsu
+      "itssRole":0, // "notAvailable (0)" itssRole McmItssRole, -- The role of the originating ITS-S can only be identified once the MC is accepted by all relevant participants
+      "position":{
+         "latitude":900000001,  // fissa per RSU
+         "longitude":1800000001,    // fissa per RSU
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":1,  // per request = 1    
+      "manoeuvreId":10, // utilizzare il valore di sessione precedentemente calcolato
+      "concept":0,   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+      "rational": {
+         "manoeuvreCooperationCost": 50 // da settare
+      } 
+   },
+   "mcmContainer":{
+        "advisedManoeuvreContainer":[
+            {
+                "executantID":1, // variabile -> dipende a chi è rivolto il consiglio
+                "currentStateAdvisedChange": {   // opzionale
+                    "stayInLane": null 
+                },
+
+                "submaneuvres":[    // obbligatorio: almeno una submanoeuvreId per ogni executantID
+                    {
+                        "submanoeuvreId":1, // obbligatorio
+                        "advisedTrajectory": {  // opzionale
+                            "wayPointType": 1,  // opzionale, ma obbligatorio se viene fornito advisedTrajectory
+                            "wayPoints": [  // opzionale, ma obbligatorio se viene fornito advisedTrajectory
+                                {
+                                    "pathPosition": {
+                                        "deltaLatitude": 0,
+                                        "deltaLongitude": 0,
+                                        "deltaAltitude": 0
+                                    }
+                                }
+                            ],
+                            "speed": [ // opzionale, ma obbligatorio se viene fornito advisedTrajectory
+                                {
+                                    "speedValue": 16383,
+                                    "speedConfidence": 1
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "executantID":2, // variabile -> dipende a chi è rivolto il consiglio
+                "currentStateAdvisedChange": {   // ?
+                    "stayInLane": null 
+                },
+
+                "submaneuvres":[
+                    {
+                        "submanoeuvreId":1,
+                        "advisedTrajectory": {
+                            "wayPointType": 1, 
+                            "wayPoints": [
+                                {
+                                    "pathPosition": {
+                                        "deltaLatitude": 0,
+                                        "deltaLongitude": 0,
+                                        "deltaAltitude": 0
+                                    }
+                                }
+                            ],
+                            "speed": [ // Velocità ridotta
+                                {
+                                    "speedValue": 16383,
+                                    "speedConfidence": 1
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

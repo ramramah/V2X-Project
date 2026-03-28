@@ -1,0 +1,3 @@
+session_id,manoeuvre_id,requester_station_id,first_request_tx_wall_time,first_request_tx_sim_time,first_response_rx_wall_time,first_response_rx_sim_time,termination_rx_wall_time,termination_rx_sim_time,request_to_response_ms,request_to_termination_ms,completed
+session_0_10_1774607948493,10,0,1774607948.4934385,38.3,1774607949.061404,41.6,,,567.9655075073242,,False
+session_0_10_1774607949346,10,0,1774607949.3465075,43.4,1774607950.8465912,52.1,1774607950.4560096,49.9,1500.0836849212646,1109.5020771026611,True

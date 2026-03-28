@@ -1,0 +1,115 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074, // variabile
+      "stationID":1001, // variabile -> dipende da obu1, obu2 ed RSU
+      "stationType":1,  // variabile -> dipende da obu1, obu2 ed RSU; valore 1 per obu, valore 2 per rsu
+      "itssRole":0, // "notAvailable (0)" -> can only be identified once the MC is accepted by all relevant participants
+      "position":{
+         "latitude":900000001,  // variabile -> dato da python tramite traci(SUMO)
+         "longitude":1800000001,    // variabile -> dato da python tramite traci(SUMO)
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":0,  // per intent = 0
+      "manoeuvreId":10, // variabile -> "manoeuvreId" deve essere un contatore ciclico
+      "concept":0,   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+      "rational":{
+            "manoeuvreCooperationCost":0  // variabile -> vedere come stimare il costo per OBU1 ed OBU2
+      } 
+   },
+   "mcmContainer":{
+      "vehicleManoeuvreContainer":{
+         "vehicleCurrentStateContainer":{
+            "vehicleSpeed":{
+               "speedValue":16383,  // variabile -> dato da python tramite traci(SUMO)
+               "speedConfidence":1
+            },
+            "vehicleHeading":{
+               "value":3601,    // variabile -> dato da python tramite traci(SUMO)
+               "confidence":127
+            },
+            "vehicleSize":{
+               "vehicleType":1,
+               "vehicleLenth":{
+                  "vehicleLengthValue":50,  // vedere se prenderlo da traci(SUMO)
+                  "vehicleLengthConfidenceIndication":0
+               },
+               "vehicleWidth":2,    // vedere se prenderlo da traci(SUMO)
+               "vehicleHeight":127
+            },
+            "manoeuvreOverallStrategy":{
+               "driveStraight":null // variabile -> dipende da obu1, obu2
+            }
+         },
+         "submaneuvres":[]   // variabile -> dipende da obu1, obu2
+      }
+   }
+}
+
+// submanoeuvers proposte da Gemini per curva a sinistra
+
+"submaneuvres": [
+   {
+      "submanoeuvreID": 1,
+      "submanoeuvreStrategy": {
+         "turnLeft": null
+      },
+      "temporalCharateristics": {
+         "tRROccupancyStartTime": 0,    // Delta in ms (es. inizia ora)
+         "tRROccupancyEndTime": 4000    // Delta in ms (es. durata prevista manovra 4s)
+      },
+      "referenceTrajectory": {
+         "wayPointType": 0, // startingWayPoint
+         "wayPoints": [
+            // In ETSI ITS, i WayPoint (PathPoint) sono spesso Delta rispetto alla posizione precedente
+            // Qui inseriamo 3 punti fittizi per descrivere la curva
+            {
+               "pathPosition": {
+                  "deltaLatitude": 0,
+                  "deltaLongitude": 0
+               },
+               "pathDeltaTime": 0
+            },
+            {
+               "pathPosition": {
+                  "deltaLatitude": 100, // +1 metro Nord (scala 10^-7 o dm a seconda del CDD, qui esempio)
+                  "deltaLongitude": 50  // +0.5 metri Est
+               },
+               "pathDeltaTime": 200
+            },
+            {
+               "pathPosition": {
+                  "deltaLatitude": 200, 
+                  "deltaLongitude": 0   
+               },
+               "pathDeltaTime": 400
+            }
+         ],
+         // Opzionale: Se vuoi dare le coordinate assolute per chiarezza (poiché sono OPTIONAL nell'ASN.1)
+         // Usando le coordinate approssimative di SUMO B3 (Lat ~45.46..., Lon ~9.19...)
+         "latitudePositions": [
+             454605000, // Ingresso
+             454605010, // Centro curva
+             454605020  // Uscita verso Nord
+         ],
+         "longitudePositions": [
+             91910000,
+             91910050,
+             91910050
+         ],
+         "speed": [
+            { "speedValue": 1000, "speedConfidence": 1 }, // 10 m/s in ingresso
+            { "speedValue": 800, "speedConfidence": 1 },  // 8 m/s durante la curva
+            { "speedValue": 1200, "speedConfidence": 1 }  // 12 m/s in uscita (accelerazione)
+         ]
+      }
+      // "targetRoadResourceIContainer": ... (Opzionale, utile se vuoi prenotare corsie specifiche)
+   }
+]

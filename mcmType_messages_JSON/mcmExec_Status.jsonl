@@ -1,0 +1,52 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074, // variabile
+      "stationID":1001, // variabile -> dipende da obu1, obu2 ed RSU
+      "stationType":1,  // variabile -> dipende da obu1, obu2 ed RSU; valore 1 per obu, valore 2 per rsu
+      "itssRole":2, // notAvailable (0), coordinatingItss (1), notCoordinatingSubjectVehicle (2), targetVehicle (3)
+      "position":{
+         "latitude":900000001,  // variabile -> dato da python tramite traci(SUMO)
+         "longitude":1800000001,    // variabile -> dato da python tramite traci(SUMO)
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":7,  // per executionStatus = 7
+      "manoeuvreId":10, // variabile -> contatore ciclico; valore da mantenere durante tutta la sessione di manovra
+      "concept":0,   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+      "executionStatus": 0    //started (0), inProgress (1), completed (2),terminated (3), chained (4) -- Only for MCM of type 4 and type 7    
+   },
+   "mcmContainer":{  // modificare l'mcmContainer inserendo ManouvreAdviceContainer -> Submanouvre -> submanouvreID
+         "vehicleManoeuvreContainer":{
+         "vehicleCurrentStateContainer":{
+            "vehicleSpeed":{
+               "speedValue":16383,  // variabile -> dato da python tramite traci(SUMO)
+               "speedConfidence":1
+            },
+            "vehicleHeading":{
+               "value":3601,    // variabile -> dato da python tramite traci(SUMO)
+               "confidence":127
+            },
+            "vehicleSize":{
+               "vehicleType":1,
+               "vehicleLenth":{
+                  "vehicleLengthValue":50,  // vedere se prenderlo da traci(SUMO)
+                  "vehicleLengthConfidenceIndication":0
+               },
+               "vehicleWidth":2,    // vedere se prenderlo da traci(SUMO)
+               "vehicleHeight":127
+            },
+            "manoeuvreOverallStrategy":{
+               "driveStraight":null // variabile -> dipende da obu1, obu2
+            }
+         },
+         "submaneuvres":[]   // variabile -> dipende da obu1, obu2
+      }
+   }
+}

@@ -1,0 +1,68 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39110,
+      "stationID":9001,
+      "stationType":2,
+      "itssRole":1, // Nella fase di Reservation l'RSU è ufficialmente Coordinatore 
+      "position":{
+         "latitude":900000001,
+         "longitude":1800000001,
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":3,  // Reservation
+      "manoeuvreId":10,
+      "concept":0,
+
+      // AGGIUNTA LOGICA: Anche nella Reservation confermiamo il costo (accordo chiuso)
+      "rational": {
+         "manoeuvreCooperationCost": 50
+      }
+   },
+   "mcmContainer":{
+      "advisedManoeuvreContainer":[
+         {
+            "executantID":1, // variabile -> dipende a chi è rivolto il consiglio
+            "currentStateAdvisedChange": {   // ?
+                "stayInLane": null 
+            },
+
+            "submaneuvres":[
+               {
+                  "submanoeuvreId":1,
+                  
+                  // RISPOSTA ALLA TUA DOMANDA: "aggiungere anche advisedTrajectory?"
+                  // SI, ASSOLUTAMENTE.
+                  // Se l'Offer conteneva una traiettoria, la Reservation DEVE confermare quella traiettoria.
+                  // Usare la traiettoria evita anche l'ambiguità di annidamento su temporalCharacteristics.
+                  "advisedTrajectory": {
+                      "wayPointType": 1, 
+                      "wayPoints": [
+                          {
+                              "pathPosition": {
+                                  "deltaLatitude": 0,
+                                  "deltaLongitude": 0,
+                                  "deltaAltitude": 0
+                              }
+                          }
+                      ],
+                      "speed": [ // Conferma velocità ridotta
+                          {
+                              "speedValue": 16383,
+                              "speedConfidence": 1
+                          }
+                      ]
+                  }
+               }
+            ]
+         }
+      ]
+   }
+}

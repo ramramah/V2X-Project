@@ -1,0 +1,31 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074,  // variabile
+      "stationID":9001, // variabile -> dipende da obu1 ed obu2
+      "stationType":1,  // valore 1 per obu
+      "itssRole":0, // "notAvailable (0)" itssRole McmItssRole, -- The role of the originating ITS-S can only be identified once the MC is accepted by all relevant participants
+      "position":{
+         "latitude":900000001,  // variabile -> dato da python tramite traci(SUMO)
+         "longitude":1800000001,    // variabile -> dato da python tramite traci(SUMO)
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":2,  // per response = 2    
+      "manoeuvreId":10, // mettere valore che ha "calcolato" l'rsu
+      "concept":0   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+   },
+   "mcmContainer":{
+        "responseContainer":{
+            "manouevreResponse":0,  // accept (0), decline (1)
+            // "declineReason":null,   // OPTIONAL
+            "submaneuvres":[]   // OPTIONAL 
+        }
+   }
+}   

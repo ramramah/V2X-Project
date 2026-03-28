@@ -1,0 +1,34 @@
+<!--  https://sumo.dlr.de/docs/Other/File_Extensions.html  -->
+
+<routes>
+    <!--  <route id="0" edges="w_to_c1 c1_to_c2 c2_to_e"/>  <route id="route0" color="1,1,0" edges="beg middle end rend"/> -->
+    <route id="route0" edges="A3B3 B3B4"/>
+    <route id="route1" edges="C3B3 B3A3"/>
+
+    <vType id="type1" accel="0.8" decel="7.5" sigma="0.5" length="5" maxSpeed="27.7"/>
+    <!-- red -->
+    <vehicle id="1" type="type1" depart="0" route="route0" color="1,0,0"/>
+    <!-- green -->
+    <vehicle id="2" type="type1" depart="0" route="route1" color="0,1,0"/> 
+    <!-- red -->
+    <vehicle id="3" type="type1" depart="0" route="route0" color="1,0,0"/>
+    <!-- green -->
+    <vehicle id="4" type="type1" depart="0" route="route1" color="0,1,0"/> 
+    <!-- red -->
+    <vehicle id="5" type="type1" depart="0" route="route0" color="1,0,0"/>
+    <!-- green -->
+    <vehicle id="6" type="type1" depart="0" route="route1" color="0,1,0"/> 
+    <!-- red -->
+    <vehicle id="7" type="type1" depart="0" route="route0" color="1,0,0"/>
+    <!-- green -->
+    <vehicle id="8" type="type1" depart="0" route="route1" color="0,1,0"/> 
+    <!-- red -->
+    <vehicle id="9" type="type1" depart="0" route="route0" color="1,0,0"/>
+    <!-- green -->
+    <vehicle id="10" type="type1" depart="0" route="route1" color="0,1,0"/> 
+    <!-- red -->
+    <vehicle id="11" type="type1" depart="0" route="route0" color="1,0,0"/>
+    <!-- green -->
+    <vehicle id="12" type="type1" depart="0" route="route1" color="0,1,0"/> 
+
+</routes>

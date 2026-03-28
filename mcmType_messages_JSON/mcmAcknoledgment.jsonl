@@ -1,0 +1,31 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074,  // variabile
+      "stationID":9001, // variabile -> dipende da obu1, obu2 ed RSU
+      "stationType":2,  // variabile -> dipende da obu1, obu2 ed RSU; valore 1 per obu, valore 2 per rsu
+      "itssRole":0, // "notAvailable (0)" itssRole McmItssRole, -- The role of the originating ITS-S can only be identified once the MC is accepted by all relevant participants
+      "position":{
+         "latitude":900000001,  // fissa per RSU
+         "longitude":1800000001,    // fissa per RSU
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":9,  // per ack = 9    
+      "manoeuvreId":10, // utilizzare il valore di sessione precedentemente calcolato
+      "concept":0   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+   },
+   "mcmContainer":{
+        "acknowledgmentContainer":{
+            "acknowledgedType":9, // mcmType
+            "generationDeltaTime":39074 // variabile DA GEMINI: Timestamp del messaggio RICEVUTO (la Response del veicolo), NON quello attuale.
+            // Serve a collegare univocamente l'Ack alla Response specifica.
+        }
+   }
+}

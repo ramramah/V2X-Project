@@ -1,0 +1,28 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074, // variabile
+      "stationID":1001, // RSU
+      "stationType":2,  // variabile -> dipende da obu1, obu2 ed RSU; valore 1 per obu, valore 2 per rsu
+      "itssRole":1, // notAvailable (0), coordinatingItss (1), notCoordinatingSubjectVehicle (2), targetVehicle (3)
+      "position":{
+         "latitude":900000001,  // fissa per RSU
+         "longitude":1800000001,    // fissa per RSU
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":4,  // per termination = 4
+      "manoeuvreId":10, // variabile -> contatore ciclico; valore da mantenere durante tutta la sessione di manovra
+      "concept":0,   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+      "executionStatus": 2    //started (0), inProgress (1), completed (2),terminated (3), chained (4) -- Only for MCM of type 4 and type 7    
+   },
+   "mcmContainer":{
+        "terminationContainer":{}
+    }
+}

@@ -1,0 +1,72 @@
+version: '2.4'
+services:
+    rsu:
+        hostname: rsu
+        restart: always
+        image: ghcr.io/nap-it/vanetza-nap:latest
+        cap_add:
+            - "NET_ADMIN"
+        environment:
+            - VANETZA_STATION_ID=0
+            - VANETZA_STATION_TYPE=15
+            - VANETZA_MAC_ADDRESS=6e:06:e0:03:00:00
+            - VANETZA_INTERFACE=br0
+            - START_EMBEDDED_MOSQUITTO=true
+            - SUPPORT_MAC_BLOCKING=true 
+            - VANETZA_CAM_ENABLED=true   
+            - VANETZA_CAM_PERIODICITY=0   
+            - VANETZA_MCM_ENABLED=true     
+        networks:
+            vanetzalan0:
+                ipv4_address: 192.168.98.10
+        volumes:
+            - ./tools/socktap/config.ini:/config.ini
+        
+
+    obu1:
+        hostname: obu1
+        restart: always
+        image: ghcr.io/nap-it/vanetza-nap:latest
+        cap_add:
+            - "NET_ADMIN"
+        environment:
+            - VANETZA_STATION_ID=1
+            - VANETZA_STATION_TYPE=5
+            - VANETZA_MAC_ADDRESS=6e:06:e0:03:00:01
+            - VANETZA_INTERFACE=br0
+            - START_EMBEDDED_MOSQUITTO=true
+            - SUPPORT_MAC_BLOCKING=true
+            - VANETZA_CAM_ENABLED=true
+            - VANETZA_CAM_PERIODICITY=0
+            - VANETZA_MCM_ENABLED=true
+        networks:
+            vanetzalan0:
+                ipv4_address: 192.168.98.20
+        volumes:
+            - ./tools/socktap/config.ini:/config.ini
+    
+    obu2:
+        hostname: obu2
+        restart: always
+        image: ghcr.io/nap-it/vanetza-nap:latest
+        cap_add:
+            - "NET_ADMIN"
+        environment:
+            - VANETZA_STATION_ID=2
+            - VANETZA_STATION_TYPE=5
+            - VANETZA_MAC_ADDRESS=6e:06:e0:03:00:02
+            - VANETZA_INTERFACE=br0
+            - START_EMBEDDED_MOSQUITTO=true
+            - SUPPORT_MAC_BLOCKING=true
+            - VANETZA_CAM_ENABLED=true
+            - VANETZA_CAM_PERIODICITY=0
+            - VANETZA_MCM_ENABLED=true
+        networks:
+            vanetzalan0:
+                ipv4_address: 192.168.98.30
+        volumes:
+            - ./tools/socktap/config.ini:/config.ini
+            
+networks:
+  vanetzalan0:
+    external: true

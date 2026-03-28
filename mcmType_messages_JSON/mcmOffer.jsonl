@@ -1,0 +1,163 @@
+{
+   "basicContainer":{
+      "generationDeltaTime":39074,  // variabile
+      "stationID":9001, // variabile -> dipende da obu1, obu2 ed RSU
+      "stationType":2,  // variabile -> dipende da obu1, obu2 ed RSU; valore 1 per obu, valore 2 per rsu
+      "itssRole":0, // "notAvailable (0)" itssRole McmItssRole, -- The role of the originating ITS-S can only be identified once the MC is accepted by all relevant participants
+      "position":{
+         "latitude":900000001,  // fissa per RSU
+         "longitude":1800000001,    // fissa per RSU
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":8,  // per offer = 8    
+      "manoeuvreId":10, // variabile -> contatore ciclico; valore da mantenere durante tutta la sessione di manovra
+      "concept":0   // ManoeuvreCoordinationConcept -> agreementSeeking (0); fisso per tutti gli mcmType
+   },
+   "mcmContainer":{
+      "advisedManoeuvreContainer":[
+         {
+            "executantID":1001, // variabile -> dipende a chi è rivolto il consiglio
+            "submaneuvres":[
+               {
+                  "submanoeuvreId":1,
+                  "temporalCharateristics":{
+                     "tRROccupancyStartTime":0,
+                     "tRROccupancyEndTime":5000
+                  }
+               }
+            ]
+         }
+      ]
+   }
+}
+
+// da gemini: per veicolo che avrebbe la precedenza
+
+{
+   "basicContainer":{
+      "generationDeltaTime":39105,
+      "stationID":9001,
+      "stationType":2,
+      "itssRole":0,
+      "position":{
+         "latitude":900000001,
+         "longitude":1800000001,
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":8,
+      "manoeuvreId":10,
+      "concept":0,
+      "rational":{
+         "manoeuvreCooperationCost":50
+      }
+   },
+   "mcmContainer":{
+      "advisedManoeuvreContainer":[
+         {
+            "executantID":1,
+            "currentStateAdvisedChange":{
+               "stayInLane":null
+            },
+            "submaneuvres":[
+               {
+                  "submanoeuvreId":1,
+                  "advisedTrajectory":{
+                     "wayPointType":1,
+                     "wayPoints":[
+                        {
+                           "pathPosition":{
+                              "deltaLatitude":0,
+                              "deltaLongitude":0,
+                              "deltaAltitude":0
+                           }
+                        }
+                     ],
+                     
+                     // !!! CORREZIONE QUI SOTTO !!!
+                     // Speed è definito come SEQUENCE OF Speed.
+                     // Speed (da ETSI CDD) è un oggetto { speedValue, speedConfidence }.
+                     "speed":[
+                        {
+                           "speedValue": 16383,
+                           "speedConfidence": 1
+                        }
+                     ]
+                  }
+               }
+            ]
+         }
+      ]
+   }
+}
+
+
+// da gemini: per veicolo che deve ottiene la precedenza vedere se riaggiungere advisedTargetRoadResource o
+// inserire waypoints
+   "basicContainer":{
+      "generationDeltaTime":39100,
+      "stationID":9001, // ID della RSU
+      "stationType":2,  // 2 = Roadside Unit
+      "itssRole":0,     // "notAvailable" finché non confermato da tutti
+      "position":{
+         "latitude":900000001,
+         "longitude":1800000001,
+         "positionConfidenceEllipse":{
+            "semiMajorAxisLength":4095,
+            "semiMinorAxisLength":4095,
+            "semiMajorAxisOrientation":3601
+         },
+         "altitude":{
+            "altitudeValue":800001,
+            "altitudeConfidence":15
+         }
+      },
+      "mcmType":8,      // Offer
+      "manoeuvreId":10, // Session ID generato dalla RSU
+      "concept":0,      // Agreement Seeking
+
+      // LOGICA PRECEDENZA:
+      // Costo 0 indica che per il veicolo 2 è vantaggioso accettare.
+      // Se fosse stato il veicolo che doveva fermarsi, il costo sarebbe stato alto (es. 100).
+      "rational": {
+         "manoeuvreCooperationCost": 0 
+      }
+   },
+   "mcmContainer":{
+      "advisedManoeuvreContainer":[
+         {
+            // DESTINATARIO: Veicolo 2 (quello che vogliamo far passare)
+            "executantID":2, 
+
+            // COMANDO SEMANTICO:
+            // "Rimani nella corsia e procedi" -> implica non fermarsi/cedere precedenza
+            "currentStateAdvisedChange": {
+                "stayInLane": null 
+            },
+
+            // SUBMANOEUVRES (Obbligatorio per ASN.1 ma svuotato di TRR)
+            "submaneuvres":[
+               {
+                  "submanoeuvreId":1
+                  // advisedTargetRoadResource ELIMINATO come richiesto
+               }
+            ]
+         }
+      ]
+   }
+}
