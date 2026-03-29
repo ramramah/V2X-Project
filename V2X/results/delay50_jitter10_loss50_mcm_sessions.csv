@@ -1,6 +1,0 @@
-session_id,manoeuvre_id,requester_station_id,first_request_tx_wall_time,first_request_tx_sim_time,first_response_rx_wall_time,first_response_rx_sim_time,termination_rx_wall_time,termination_rx_sim_time,request_to_response_ms,request_to_termination_ms,completed
-session_0_10_1773776365173,10,0,1773776365.173093,38.3,,,,,,,False
-session_0_10_1773776365941,10,0,1773776365.9419749,43.4,,,,,,,False
-session_0_10_1773776366783,10,0,1773776366.7831683,48.5,,,,,,,False
-session_0_10_1773776367576,10,0,1773776367.5766683,53.6,,,,,,,False
-session_0_10_1773776368319,10,0,1773776368.3190892,58.7,,,,,,,False
